@@ -1,3 +1,4 @@
+import CurrencyInputPanel from 'components/CurrencyInputPanel';
 import SwapHeader from 'components/swap/SwapHeader';
 import ThemeProvider from 'components/theme';
 import styled from 'styled-components';
@@ -29,9 +30,9 @@ function App() {
       <ThemeProvider>
         <AppWrapper>
           <BodyWrapper>
-            22
             <AppBody>
               <SwapHeader />
+              <CurrencyInputPanel />
             </AppBody>
           </BodyWrapper>
         </AppWrapper>

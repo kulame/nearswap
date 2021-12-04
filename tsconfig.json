@@ -17,8 +17,10 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "components/*": ["src/components/*"]
-    }
+      "components/*": ["src/components/*"],
+      "assets/*": ["src/components/*"]
+    },
+    "types": ["vite-plugin-svgr/client"]
   },
   "include": ["./src"]
 }
