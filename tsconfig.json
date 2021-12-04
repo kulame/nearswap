@@ -18,7 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "components/*": ["src/components/*"],
-      "assets/*": ["src/components/*"]
+      "assets/*": ["src/components/*"],
+      "near/*": ["src/near/*"]
     },
     "types": ["vite-plugin-svgr/client"]
   },

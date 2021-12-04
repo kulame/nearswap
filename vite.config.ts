@@ -15,7 +15,8 @@ export default defineConfig({
   resolve: {
     alias: {
       components: resolve(__dirname, "src", "components"),
-      assets: resolve(__dirname, "src", "assets")
+      assets: resolve(__dirname, "src", "assets"),
+      near: resolve(__dirname,"src","near")
     }
   }
 })

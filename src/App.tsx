@@ -1,6 +1,7 @@
 import CurrencyInputPanel from 'components/CurrencyInputPanel';
 import SwapHeader from 'components/swap/SwapHeader';
 import ThemeProvider from 'components/theme';
+import { Token } from 'near/FT';
 import styled from 'styled-components';
 import './App.css';
 import AppBody from './AppBody';
@@ -25,6 +26,14 @@ const BodyWrapper = styled.div`
 `;
 
 function App() {
+  const token: Token = {
+    contract: 'kula.kula.testnet',
+    owner_id: 'kula.testnet',
+    spec: 'ft-1.0.0',
+    name: 'kula',
+    symbol: 'kula',
+    decimals: 8,
+  };
   return (
     <>
       <ThemeProvider>
@@ -32,7 +41,7 @@ function App() {
           <BodyWrapper>
             <AppBody>
               <SwapHeader />
-              <CurrencyInputPanel />
+              <CurrencyInputPanel currency={token} />
             </AppBody>
           </BodyWrapper>
         </AppWrapper>
