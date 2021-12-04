@@ -70,6 +70,14 @@ const StyledDropDown = styled(DropDown)<{ selected: boolean }>`
     stroke-width: 1.5px;
   }
 `;
+
+const StyledTokenName = styled.span<{ active?: boolean }>`
+  ${({ active }) =>
+    active
+      ? '  margin: 0 0.25rem 0 0.25rem;'
+      : '  margin: 0 0.25rem 0 0.25rem;'}
+  font-size:  ${({ active }) => (active ? '18px' : '18px')};
+`;
 export default function CurrencyInputPanel() {
   return (
     <>
@@ -77,7 +85,9 @@ export default function CurrencyInputPanel() {
         <InputRow style={{}} selected={false}>
           <CurrencySelect visible={true} selected={true} hideInput={false}>
             <Aligner>
-              <RowFixed></RowFixed>
+              <RowFixed>
+                <StyledTokenName className="pair-name-container"></StyledTokenName>
+              </RowFixed>
               <StyledDropDown selected={true} />
             </Aligner>
           </CurrencySelect>
