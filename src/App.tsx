@@ -2,6 +2,7 @@ import CurrencyInputPanel from 'components/CurrencyInputPanel';
 import SwapHeader from 'components/swap/SwapHeader';
 import ThemeProvider from 'components/theme';
 import { Token } from 'near/FT';
+import { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 import AppBody from './AppBody';
@@ -26,6 +27,7 @@ const BodyWrapper = styled.div`
 `;
 
 function App() {
+  const [value, setValue] = useState<string>('');
   const token: Token = {
     contract: 'kula.kula.testnet',
     owner_id: 'kula.testnet',
@@ -41,7 +43,14 @@ function App() {
           <BodyWrapper>
             <AppBody>
               <SwapHeader />
-              <CurrencyInputPanel currency={token} />
+              <CurrencyInputPanel
+                value={value}
+                currency={token}
+                onUserInput={(text) => {
+                  console.log(text);
+                  setValue(text);
+                }}
+              />
             </AppBody>
           </BodyWrapper>
         </AppWrapper>

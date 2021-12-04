@@ -1,9 +1,12 @@
 import { ReactComponent as DropDown } from 'assets/images/dropdown.svg';
 import { ButtonGray } from 'components/Button';
+import { loadingOpacityMixin } from 'components/Loader/styled';
+import { Input as NumericalInput } from 'components/NumericalInput';
 import { RowFixed } from 'components/Row';
 import { Token } from 'near/FT';
 import { darken } from 'polished';
 import styled from 'styled-components';
+
 const Container = styled.div`
   border-radius: 20px;
   border: 1px solid ${({ theme }) => theme.bg2};
@@ -80,10 +83,18 @@ const StyledTokenName = styled.span<{ active?: boolean }>`
   font-size:  ${({ active }) => (active ? '18px' : '18px')};
 `;
 
+const StyledNumericalInput = styled(NumericalInput)<{ $loading: boolean }>`
+  ${loadingOpacityMixin}
+`;
+
 interface CurrencyInputPanelProps {
+  value: string;
+  onUserInput: (value: string) => void;
   currency: Token;
 }
 export default function CurrencyInputPanel({
+  value,
+  onUserInput,
   currency,
 }: CurrencyInputPanelProps) {
   console.log(currency.symbol);
@@ -104,6 +115,12 @@ export default function CurrencyInputPanel({
               <StyledDropDown selected={true} />
             </Aligner>
           </CurrencySelect>
+          <StyledNumericalInput
+            className="token-amount-input"
+            value={value}
+            onUserInput={onUserInput}
+            $loading={false}
+          />
         </InputRow>
       </Container>
     </>
