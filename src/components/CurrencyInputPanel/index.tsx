@@ -1,6 +1,7 @@
 import { ReactComponent as DropDown } from 'assets/images/dropdown.svg';
 import { ButtonGray } from 'components/Button';
 import { RowFixed } from 'components/Row';
+import { Token } from 'near/FT';
 import { darken } from 'polished';
 import styled from 'styled-components';
 const Container = styled.div`
@@ -78,8 +79,14 @@ const StyledTokenName = styled.span<{ active?: boolean }>`
       : '  margin: 0 0.25rem 0 0.25rem;'}
   font-size:  ${({ active }) => (active ? '18px' : '18px')};
 `;
-export default function CurrencyInputPanel({ currency }) {
-  console.log(currency.token);
+
+interface CurrencyInputPanelProps {
+  currency: Token;
+}
+export default function CurrencyInputPanel({
+  currency,
+}: CurrencyInputPanelProps) {
+  console.log(currency.symbol);
   return (
     <>
       <Container>
