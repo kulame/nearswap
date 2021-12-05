@@ -1,5 +1,6 @@
 import { AutoColumn } from 'components/Column';
 import CurrencyInputPanel from 'components/CurrencyInputPanel';
+import Header from 'components/Header';
 import { Wrapper } from 'components/swap/styleds';
 import SwapHeader from 'components/swap/SwapHeader';
 import ThemeProvider from 'components/theme';
@@ -13,6 +14,15 @@ const AppWrapper = styled.div`
   display: flex;
   flex-flow: column;
   align-items: flex-start;
+`;
+
+const HeaderWrapper = styled.div`
+  ${({ theme }) => theme.flexRowNoWrap}
+  width: 100%;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 2;
 `;
 
 const BodyWrapper = styled.div`
@@ -51,6 +61,9 @@ function App() {
     <>
       <ThemeProvider>
         <AppWrapper>
+          <HeaderWrapper>
+            <Header />
+          </HeaderWrapper>
           <BodyWrapper>
             <AppBody>
               <SwapHeader />
