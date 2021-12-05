@@ -1,11 +1,9 @@
 import { ReactComponent as Logo } from 'assets/svg/logo.svg';
 import Row from 'components/Row';
-import { ExternalLink } from 'components/theme/components';
 import useTheme from 'hooks/useTheme';
 import { darken } from 'polished';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
   grid-template-columns: 120px 1fr 120px;
@@ -128,34 +126,6 @@ const StyledNavLink = styled(NavLink).attrs({
   :hover,
   :focus {
     color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-`;
-
-const StyledExternalLink = styled(ExternalLink).attrs({
-  activeclassname,
-})<{ isActive?: boolean }>`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  border-radius: 3rem;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${({ theme }) => theme.text2};
-  font-size: 1rem;
-  width: fit-content;
-  margin: 0 12px;
-  font-weight: 500;
-
-  &.${activeclassname} {
-    border-radius: 12px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text1};
-  }
-
-  :hover,
-  :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-    text-decoration: none;
   }
 `;
 
