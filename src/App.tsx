@@ -1,9 +1,10 @@
 import Header from 'components/Header';
 import ThemeProvider from 'components/theme';
+import Pool from 'pages/Pool';
+import Swap from 'pages/Swap';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import './App.css';
-import Swap from './pages/Swap';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Swap />} />
               <Route path="/swap" element={<Swap />} />
-              <Route path="/pool" element={<div />} />
+              <Route path="/pool" element={<Pool />} />
             </Routes>
           </BodyWrapper>
         </AppWrapper>

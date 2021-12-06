@@ -91,11 +91,13 @@ interface CurrencyInputPanelProps {
   value: string;
   onUserInput: (value: string) => void;
   currency: Token;
+  id: string;
 }
 export default function CurrencyInputPanel({
   value,
   onUserInput,
   currency,
+  id,
 }: CurrencyInputPanelProps) {
   console.log(currency.symbol);
   return (

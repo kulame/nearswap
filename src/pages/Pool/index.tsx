@@ -1,14 +1,17 @@
 import AppBody from 'components/Body';
-import { AutoColumn } from 'components/Column';
+import { ButtonLight } from 'components/Button';
+import { AutoColumn, ColumnCenter } from 'components/Column';
 import CurrencyInputPanel from 'components/CurrencyInputPanel';
+import { AddRemoveTabs } from 'components/NavigationTabs';
 import { Wrapper } from 'components/swap/styleds';
-import SwapHeader from 'components/swap/SwapHeader';
 import { Token } from 'near/FT';
-import { useState } from 'react';
-
-export default function Swap() {
+import { useContext, useState } from 'react';
+import { Plus } from 'react-feather';
+import { ThemeContext } from 'styled-components';
+export default function Pool() {
   const [fromValue, setFromValue] = useState<string>('');
   const [toValue, setToValue] = useState<string>('');
+  const theme = useContext(ThemeContext);
   const kulaToken: Token = {
     contract: 'kula.kula.testnet',
     owner_id: 'kula.testnet',
@@ -25,30 +28,37 @@ export default function Swap() {
     symbol: 'ayat',
     decimals: 8,
   };
+  const toggleWalletModal = (event) => {
+    console.log(event);
+  };
   return (
     <>
       <AppBody>
-        <SwapHeader />
-        <Wrapper id="swap-page">
+        <AddRemoveTabs adding={true} />
+        <Wrapper id="pool-page">
           <AutoColumn gap={'sm'}>
             <CurrencyInputPanel
               value={fromValue}
-              currency={kulaToken}
               onUserInput={(text) => {
-                console.log(text);
                 setFromValue(text);
               }}
-              id="swap-currency-input"
+              currency={kulaToken}
+              id="add-liquidity-input-tokena"
             />
+            <ColumnCenter>
+              <Plus size="16" color={theme.text2} />
+            </ColumnCenter>
             <CurrencyInputPanel
               value={toValue}
-              currency={ayatToken}
               onUserInput={(text) => {
-                console.log(text);
                 setToValue(text);
               }}
-              id="swap-currency-output"
+              currency={ayatToken}
+              id="add-liquidity-input-tokenb"
             />
+            <ButtonLight onClick={toggleWalletModal}>
+              Connect Wallet
+            </ButtonLight>
           </AutoColumn>
         </Wrapper>
       </AppBody>

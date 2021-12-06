@@ -1,8 +1,7 @@
 import { ReactComponent as Logo } from 'assets/svg/logo.svg';
+import { StyledNavLink } from 'components/NavigationTabs';
 import Row from 'components/Row';
 import useTheme from 'hooks/useTheme';
-import { darken } from 'polished';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
@@ -95,38 +94,6 @@ const HeaderLinks = styled(Row)`
     border: 1px solid ${({ theme }) => theme.bg2};
     box-shadow: 0px 6px 10px rgb(0 0 0 / 2%);
   `};
-`;
-
-const activeclassname = 'ACTIVE';
-
-const StyledNavLink = styled(NavLink).attrs({
-  activeclassname,
-})`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  border-radius: 3rem;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${({ theme }) => theme.text2};
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 8px 12px;
-  word-break: break-word;
-  overflow: hidden;
-  white-space: nowrap;
-  &.${activeclassname} {
-    border-radius: 12px;
-    font-weight: 600;
-    justify-content: center;
-    color: ${({ theme }) => theme.text1};
-    background-color: ${({ theme }) => theme.bg2};
-  }
-
-  :hover,
-  :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
 `;
 
 export default function Header() {

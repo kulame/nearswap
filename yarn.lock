@@ -1055,7 +1055,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-router-dom@^5.3.2":
+"@types/react-router-dom@^6.0.2":
   version "5.3.2"
   resolved "https://registry.npmmirror.com/@types/react-router-dom/download/@types/react-router-dom-5.3.2.tgz#ebd8e145cf056db5c66eb1dac63c72f52e8542ee"
   integrity sha1-69jhRc8FbbXGbrHaxjxy9S6FQu4=
@@ -2341,7 +2341,7 @@ history@^5.1.0:
 
 hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.3.0:
   version "3.3.2"
-  resolved "https://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-3.3.2.tgz"
+  resolved "https://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha1-7OCsr3HWLClpwuxZ/v9CpLGoW0U=
   dependencies:
     react-is "^16.7.0"
