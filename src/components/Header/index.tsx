@@ -1,9 +1,17 @@
 import { StyledNavLink } from 'components/NavigationTabs';
 import Row from 'components/Row';
-import { Text, Web3StatusConnected } from 'components/Web3Status';
+import {
+  Text,
+  Web3StatusConnected,
+  Web3StatusDisconnected
+} from 'components/Web3Status';
 import useTheme from 'hooks/useTheme';
-import { signIn } from 'near/Account';
+import * as nearAPI from 'near-api-js';
+import { ConnectedWalletAccount } from 'near-api-js';
+import { getWallet, NearWalletContext } from 'near/Account';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+const { utils } = nearAPI;
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
@@ -121,12 +129,63 @@ const HeaderElement = styled.div`
   `};
 `;
 
-const toggleWalletModel = async () => {
-  console.log('Toggle Wallet Model');
-  await signIn();
-};
+const AccountElement = styled.div<{ active: boolean }>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: ${({ theme, active }) => (!active ? theme.bg1 : theme.bg1)};
+  border-radius: 12px;
+  white-space: nowrap;
+  width: 100%;
+
+  :focus {
+    border: 1px solid blue;
+  }
+`;
+
+const BalanceText = styled(Text)`
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    display: none;
+  `};
+`;
 
 export default function Header() {
+  const [balance, setBalance] = useState('0');
+  const [wallet, setWallet] = useContext(NearWalletContext);
+  const [account, setAccount] = useState<ConnectedWalletAccount | null>(null);
+
+  console.log(wallet);
+
+  const getAccountInfo = useCallback(async () => {
+    console.log('get account info');
+    if (!wallet) {
+      const myWallet = await getWallet();
+      setWallet(myWallet);
+      const account = myWallet.account();
+      setAccount(account);
+      const balance = await account.getAccountBalance();
+      setBalance(utils.format.formatNearAmount(balance.total, 4));
+    }
+  }, []);
+
+  useEffect(() => {
+    getAccountInfo();
+  }, []);
+
+  const toggleWalletModel = async () => {
+    console.log('Toggle Wallet Model');
+    if (!(wallet && wallet.isSignedIn())) {
+      const myWallet = await getWallet();
+      myWallet.requestSignIn();
+    }
+    console.log(account);
+  };
+
+  const disconnectWallet = async () => {
+    wallet?.signOut();
+    console.log('wallet disconnected');
+  };
+
   const { white } = useTheme();
   return (
     <HeaderFrame id="header frame" showBackground={scrollY > 45}>
@@ -137,9 +196,30 @@ export default function Header() {
       </HeaderLinks>
       <HeaderControls>
         <HeaderElement>
-          <Web3StatusConnected id="connect-wallet" onClick={toggleWalletModel}>
-            <Text>连接钱包</Text>
-          </Web3StatusConnected>
+          <AccountElement active={!!account}>
+            {account ? (
+              <BalanceText>
+                {account.accountId} {balance} near
+              </BalanceText>
+            ) : (
+              <Web3StatusConnected
+                id="connect-wallet"
+                onClick={toggleWalletModel}
+              >
+                <Text>连接钱包</Text>
+              </Web3StatusConnected>
+            )}
+          </AccountElement>
+        </HeaderElement>
+        <HeaderElement>
+          {account ? (
+            <Web3StatusDisconnected
+              id="disconnect-wallet"
+              onClick={disconnectWallet}
+            >
+              <Text>关闭连接</Text>
+            </Web3StatusDisconnected>
+          ) : null}
         </HeaderElement>
       </HeaderControls>
     </HeaderFrame>

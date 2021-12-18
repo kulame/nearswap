@@ -1,5 +1,5 @@
 import * as nearAPI from 'near-api-js';
-
+import { createContext } from 'react';
 const { connect, keyStores, WalletConnection } = nearAPI;
 
 const config = {
@@ -12,11 +12,14 @@ const config = {
   headers: {},
 };
 
-export const signIn = async () => {
+export const getWallet = async () => {
   console.log('Toggle Wallet Model');
   const near = await connect(config);
 
   // create wallet connection
   const wallet = new WalletConnection(near, null);
-  wallet.requestSignIn();
+  return wallet;
 };
+
+type StateType = [WalletConnection | null, (wallet: WalletConnection) => void];
+export const NearWalletContext = createContext<StateType>({} as StateType);

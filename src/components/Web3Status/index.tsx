@@ -64,6 +64,27 @@ export const Web3StatusConnected = styled(Web3StatusGeneric)<{
   }
 `;
 
+export const Web3StatusDisconnected = styled(Web3StatusGeneric)<{
+  pending?: boolean;
+}>`
+  background-color: ${({ pending, theme }) =>
+    pending ? theme.primary1 : theme.bg0};
+  border: 1px solid
+    ${({ pending, theme }) => (pending ? theme.primary1 : theme.bg1)};
+  color: ${({ pending, theme }) => (pending ? theme.white : theme.text1)};
+  font-weight: 500;
+  :hover,
+  :focus {
+    border: 1px solid ${({ theme }) => darken(0.05, theme.bg3)};
+
+    :focus {
+      border: 1px solid
+        ${({ pending, theme }) =>
+          pending ? darken(0.1, theme.primary1) : darken(0.1, theme.bg2)};
+    }
+  }
+`;
+
 export const Text = styled.p`
   flex: 1 1 auto;
   overflow: hidden;

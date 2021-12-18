@@ -1,11 +1,13 @@
 import Header from 'components/Header';
 import ThemeProvider from 'components/theme';
+import * as nearAPI from 'near-api-js';
+import { NearWalletContext } from 'near/Account';
 import Pool from 'pages/Pool';
 import Swap from 'pages/Swap';
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import './App.css';
-
 const AppWrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -35,22 +37,25 @@ const BodyWrapper = styled.div`
 `;
 
 function App() {
+  const [wallet, setWallet] = useState<nearAPI.WalletConnection | null>(null);
   return (
     <>
-      <ThemeProvider>
-        <AppWrapper>
-          <HeaderWrapper id="headerwrapper">
-            <Header />
-          </HeaderWrapper>
-          <BodyWrapper>
-            <Routes>
-              <Route path="/" element={<Swap />} />
-              <Route path="/swap" element={<Swap />} />
-              <Route path="/pool" element={<Pool />} />
-            </Routes>
-          </BodyWrapper>
-        </AppWrapper>
-      </ThemeProvider>
+      <NearWalletContext.Provider value={[wallet, setWallet]}>
+        <ThemeProvider>
+          <AppWrapper>
+            <HeaderWrapper id="headerwrapper">
+              <Header />
+            </HeaderWrapper>
+            <BodyWrapper>
+              <Routes>
+                <Route path="/" element={<Swap />} />
+                <Route path="/swap" element={<Swap />} />
+                <Route path="/pool" element={<Pool />} />
+              </Routes>
+            </BodyWrapper>
+          </AppWrapper>
+        </ThemeProvider>
+      </NearWalletContext.Provider>
     </>
   );
 }
