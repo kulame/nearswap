@@ -13,7 +13,9 @@ const Tabs = styled.div`
 
 const activeclassname = 'ACTIVE';
 
-export const StyledNavLink = styled(NavLink)`
+export const StyledNavLink = styled(NavLink).attrs({
+  activeclassname,
+})`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: left;
   border-radius: 3rem;
@@ -21,14 +23,19 @@ export const StyledNavLink = styled(NavLink)`
   cursor: pointer;
   text-decoration: none;
   color: ${({ theme }) => theme.text2};
-
   font-size: 1rem;
   font-weight: 500;
   padding: 8px 12px;
   word-break: break-word;
   overflow: hidden;
   white-space: nowrap;
-
+  &.${activeclassname} {
+    border-radius: 12px;
+    font-weight: 600;
+    justify-content: center;
+    color: ${({ theme }) => theme.text1};
+    background-color: ${({ theme }) => theme.bg2};
+  }
   :hover,
   :focus {
     color: ${({ theme }) => darken(0.1, theme.text1)};

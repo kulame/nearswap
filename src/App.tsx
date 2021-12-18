@@ -20,7 +20,6 @@ const HeaderWrapper = styled.div`
   top: 0;
   z-index: 2;
 `;
-
 const BodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,6 +27,7 @@ const BodyWrapper = styled.div`
   padding: 120px 16px 0px 16px;
   align-items: center;
   flex: 1;
+  position: fixed;
   z-index: 1;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     padding: 6rem 16px 16px 16px;
@@ -39,7 +39,7 @@ function App() {
     <>
       <ThemeProvider>
         <AppWrapper>
-          <HeaderWrapper>
+          <HeaderWrapper id="headerwrapper">
             <Header />
           </HeaderWrapper>
           <BodyWrapper>

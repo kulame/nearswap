@@ -1,21 +1,20 @@
-import { ReactComponent as Logo } from 'assets/svg/logo.svg';
 import { StyledNavLink } from 'components/NavigationTabs';
 import Row from 'components/Row';
+import { Text, Web3StatusConnected } from 'components/Web3Status';
 import useTheme from 'hooks/useTheme';
 import styled from 'styled-components';
+
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
-  grid-template-columns: 120px 1fr 120px;
+  grid-template-columns: 1fr 120px;
   align-items: center;
   justify-content: space-between;
-  align-items: center;
   flex-direction: row;
   width: 100%;
   top: 0;
   position: relative;
   padding: 1rem;
   z-index: 21;
-  position: relative;
   /* Background slide effect on scroll. */
   background-image: ${({ theme }) =>
     `linear-gradient(to bottom, transparent 50%, ${theme.bg0} 50% )}}`};
@@ -29,7 +28,7 @@ const HeaderFrame = styled.div<{ showBackground: boolean }>`
   background-blend-mode: hard-light;
 
   ${({ theme }) => theme.mediaWidth.upToLarge`
-    grid-template-columns: 48px 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   `};
 
   ${({ theme }) => theme.mediaWidth.upToMedium`
@@ -39,7 +38,7 @@ const HeaderFrame = styled.div<{ showBackground: boolean }>`
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     padding:  1rem;
-    grid-template-columns: 36px 1fr;
+    grid-template-columns: 1fr 1fr;
   `};
 `;
 
@@ -87,7 +86,7 @@ const HeaderLinks = styled(Row)`
     justify-self: center;
     z-index: 99;
     position: fixed;
-    bottom: 0; right: 50%;
+    bottom: 0; right:50%;
     transform: translate(50%,-50%);
     margin: 0 auto;
     background-color: ${({ theme }) => theme.bg0};
@@ -96,26 +95,47 @@ const HeaderLinks = styled(Row)`
   `};
 `;
 
+const HeaderControls = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-self: flex-end;
+`;
+
+const HeaderElement = styled.div`
+  display: flex;
+  align-items: center;
+
+  &:not(:first-child) {
+    margin-left: 0.5em;
+  }
+
+  /* addresses safari's lack of support for "gap" */
+  & > *:not(:first-child) {
+    margin-left: 8px;
+  }
+
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    align-items: center;
+  `};
+`;
+
 export default function Header() {
   const { white } = useTheme();
   return (
-    <HeaderFrame showBackground={scrollY > 45}>
-      <Title href=".">
-        <UniIcon>
-          <Logo fill={white} width="24px" height="100%" title="logo" />
-        </UniIcon>
-      </Title>
-      <HeaderLinks>
-        <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
+    <HeaderFrame id="header frame" showBackground={scrollY > 45}>
+      <HeaderLinks id={'test hearder link'}>
+        <StyledNavLink id={'swap-nav-link'} to={'/swap'}>
           Swap
         </StyledNavLink>
-        <StyledNavLink id={`pool-nav-link`} to={'/pool'}>
-          Pool
-        </StyledNavLink>
-        <StyledNavLink id={`vote-nav-link`} to={'/vote'}>
-          Vote
-        </StyledNavLink>
       </HeaderLinks>
+      <HeaderControls>
+        <HeaderElement>
+          <Web3StatusConnected id="connect-wallet">
+            <Text>连接钱包</Text>
+          </Web3StatusConnected>
+        </HeaderElement>
+      </HeaderControls>
     </HeaderFrame>
   );
 }
