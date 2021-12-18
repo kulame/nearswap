@@ -2,6 +2,7 @@ import { StyledNavLink } from 'components/NavigationTabs';
 import Row from 'components/Row';
 import { Text, Web3StatusConnected } from 'components/Web3Status';
 import useTheme from 'hooks/useTheme';
+import { signIn } from 'near/Account';
 import styled from 'styled-components';
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
@@ -120,6 +121,11 @@ const HeaderElement = styled.div`
   `};
 `;
 
+const toggleWalletModel = async () => {
+  console.log('Toggle Wallet Model');
+  await signIn();
+};
+
 export default function Header() {
   const { white } = useTheme();
   return (
@@ -131,7 +137,7 @@ export default function Header() {
       </HeaderLinks>
       <HeaderControls>
         <HeaderElement>
-          <Web3StatusConnected id="connect-wallet">
+          <Web3StatusConnected id="connect-wallet" onClick={toggleWalletModel}>
             <Text>连接钱包</Text>
           </Web3StatusConnected>
         </HeaderElement>
