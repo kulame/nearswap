@@ -51,7 +51,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Swap />} />
                 <Route path="/swap" element={<Swap />} />
-                <Route path="/deposit/:id?" element={<Deposit />} />
+                <Route path="/deposit" element={<Deposit />} />
                 <Route path="/pool" element={<Pool />} />
               </Routes>
             </BodyWrapper>

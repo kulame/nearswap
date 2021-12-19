@@ -18,7 +18,8 @@ export default defineConfig({
       assets: resolve(__dirname, "src", "assets"),
       near: resolve(__dirname, "src", "near"),
       hooks: resolve(__dirname, "src", "hooks"),
-      pages: resolve(__dirname, "src", "pages")
+      pages: resolve(__dirname, "src", "pages"),
+      utils: resolve(__dirname, "src", "utils"),
     }
   }
 })

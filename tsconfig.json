@@ -29,7 +29,8 @@
       "assets/*": ["src/components/*"],
       "near/*": ["src/near/*"],
       "hooks/*": ["src/hooks/*"],
-      "pages/*": ["src/pages/*"]
+      "pages/*": ["src/pages/*"],
+      "utils/*": ["src/utils/*"]
     },
     "types": ["vite-plugin-svgr/client"]
   },
