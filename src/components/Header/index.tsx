@@ -3,7 +3,7 @@ import Row from 'components/Row';
 import {
   Text,
   Web3StatusConnected,
-  Web3StatusDisconnected
+  Web3StatusDisconnected,
 } from 'components/Web3Status';
 import useTheme from 'hooks/useTheme';
 import * as nearAPI from 'near-api-js';

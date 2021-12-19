@@ -21,5 +21,9 @@ export const getWallet = async () => {
   return wallet;
 };
 
-type StateType = [WalletConnection | null, (wallet: WalletConnection) => void];
+type StateType = [
+  nearAPI.WalletConnection | null,
+  (wallet: nearAPI.WalletConnection) => void,
+];
+
 export const NearWalletContext = createContext<StateType>({} as StateType);
