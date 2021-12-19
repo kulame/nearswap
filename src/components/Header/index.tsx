@@ -154,17 +154,19 @@ export default function Header() {
   const [wallet, setWallet] = useContext(NearWalletContext);
   const [account, setAccount] = useState<ConnectedWalletAccount | null>(null);
 
-  console.log(wallet);
-
   const getAccountInfo = useCallback(async () => {
     console.log('get account info');
+    console.log(wallet);
     if (!wallet) {
+      console.log('get wallet');
       const myWallet = await getWallet();
-      setWallet(myWallet);
-      const account = myWallet.account();
-      setAccount(account);
-      const balance = await account.getAccountBalance();
-      setBalance(utils.format.formatNearAmount(balance.total, 4));
+      if (myWallet.isSignedIn()) {
+        setWallet(myWallet);
+        const account = myWallet.account();
+        setAccount(account);
+        const balance = await account.getAccountBalance();
+        setBalance(utils.format.formatNearAmount(balance.total, 4));
+      }
     }
   }, []);
 
@@ -188,10 +190,13 @@ export default function Header() {
 
   const { white } = useTheme();
   return (
-    <HeaderFrame id="header frame" showBackground={scrollY > 45}>
-      <HeaderLinks id={'test hearder link'}>
-        <StyledNavLink id={'swap-nav-link'} to={'/swap'}>
+    <HeaderFrame showBackground={scrollY > 45}>
+      <HeaderLinks>
+        <StyledNavLink id="swap-nav-link" to={'/swap'}>
           Swap
+        </StyledNavLink>
+        <StyledNavLink id="desposit-nav-link" to={'/deposit'}>
+          Desposit
         </StyledNavLink>
       </HeaderLinks>
       <HeaderControls>

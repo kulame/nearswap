@@ -2,6 +2,7 @@ import Header from 'components/Header';
 import ThemeProvider from 'components/theme';
 import * as nearAPI from 'near-api-js';
 import { NearWalletContext } from 'near/Account';
+import Deposit from 'pages/Deposit';
 import Pool from 'pages/Pool';
 import Swap from 'pages/Swap';
 import { useState } from 'react';
@@ -50,6 +51,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Swap />} />
                 <Route path="/swap" element={<Swap />} />
+                <Route path="/deposit/:id?" element={<Deposit />} />
                 <Route path="/pool" element={<Pool />} />
               </Routes>
             </BodyWrapper>
