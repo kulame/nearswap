@@ -64,7 +64,7 @@ export const getUserRegisteredTokens = (
   accountId: string = wallet.getAccountId(),
 ): Promise<string[]> => {
   return DexViewFunction({
-    methodName: 'get_user_whitelisted_tokens',
+    methodName: 'get_user_tokens',
     args: { account_id: accountId },
   });
 };

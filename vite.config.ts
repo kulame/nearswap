@@ -24,4 +24,7 @@ export default defineConfig({
       store: resolve(__dirname, "src", "store"),
     }
   },
+  define: {
+    "process.env": {}
+  }
 })
