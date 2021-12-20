@@ -2,6 +2,7 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import svgrPlugin from 'vite-plugin-svgr';
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(),
@@ -22,5 +23,5 @@ export default defineConfig({
       utils: resolve(__dirname, "src", "utils"),
       store: resolve(__dirname, "src", "store"),
     }
-  }
+  },
 })

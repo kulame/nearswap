@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 import Header from 'components/Header';
 import ThemeProvider from 'components/theme';
 import * as nearAPI from 'near-api-js';
@@ -9,6 +10,8 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import './App.css';
+window.Buffer = Buffer;
+
 const AppWrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -51,7 +54,9 @@ function App() {
               <Routes>
                 <Route path="/" element={<Swap />} />
                 <Route path="/swap" element={<Swap />} />
-                <Route path="/deposit/:id?" element={<Deposit />} />
+                <Route path="/deposit" element={<Deposit />}>
+                  <Route path=":id" element={<Deposit />} />
+                </Route>
                 <Route path="/pool" element={<Pool />} />
               </Routes>
             </BodyWrapper>
