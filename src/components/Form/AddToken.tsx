@@ -1,13 +1,15 @@
+import { registerTokenAndExchange } from 'near/token';
 import { useState } from 'react';
+import { IoCloseOutline } from 'react-icons/io5';
 import { FormattedMessage, useIntl } from 'react-intl';
-
+import MicroModal from 'react-micro-modal';
 export default function AddToken() {
   const [tokenId, setTokenId] = useState<string>();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    return registerTokenAndExchange(tokenId);
+    return registerTokenAndExchange(tokenId!);
   };
   const intl = useIntl();
 
@@ -16,7 +18,7 @@ export default function AddToken() {
       trigger={(open) => (
         <button
           onClick={open}
-          className="border whitespace-pre border-gray-400 text-gray-400 focus:outline-none rounded-2xl py-1 px-2 text-xs font-semibold"
+          className="px-2 py-1 text-xs font-semibold text-gray-400 whitespace-pre border border-gray-400 focus:outline-none rounded-2xl"
         >
           <FormattedMessage id="add_token" defaultMessage="Add Token" />
         </button>
@@ -40,17 +42,17 @@ export default function AddToken() {
     >
       {(close) => (
         <>
-          <div className="flex justify-between text-white pb-3">
+          <div className="flex justify-between pb-3 text-white">
             <span>
               <FormattedMessage id="add_token" defaultMessage="Add Token" />
             </span>
             <IoCloseOutline
               onClick={close}
-              className="text-gray-400 text-2xl right-6"
+              className="text-2xl text-gray-400 right-6"
             />
           </div>
           <input
-            className="focus:outline-none shadow bg-black bg-opacity-25 appearance-none rounded-lg w-96 xs:w-72 py-2 px-3 text-sm text-greenLight leading-tight font-bold"
+            className="px-3 py-2 text-sm font-bold leading-tight bg-black bg-opacity-25 rounded-lg shadow appearance-none focus:outline-none w-96 xs:w-72 text-greenLight"
             type="text"
             placeholder={intl.formatMessage({ id: 'enter_token_address' })}
             value={tokenId}
@@ -62,7 +64,7 @@ export default function AddToken() {
                 handleSubmit(e);
                 close();
               }}
-              className="flex h-8 flex-row justify-center px-4 mt-5 mb-5 items-center rounded-lg text-buttonText shadow-lg transition-colors focus:outline-none disabled:cursor-not-allowed"
+              className="flex flex-row items-center justify-center h-8 px-4 mt-5 mb-5 transition-colors rounded-lg shadow-lg text-buttonText focus:outline-none disabled:cursor-not-allowed"
               style={{
                 background: 'linear-gradient(180deg, #00C6A2 0%, #008B72 100%)',
               }}

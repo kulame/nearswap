@@ -1,3 +1,4 @@
+import db, { TokenMetadata } from 'store/Database';
 import { wallet } from './Account';
 
 export const DEX_CONTRACT_ID = 'router.kula.testnet';
@@ -10,26 +11,13 @@ export interface Token {
   readonly decimals: number;
 }
 
-export interface TokenMetadata {
-  id: string;
-  name: string;
-  symbol: string;
-  decimals: number;
-  icon: string;
-  ref?: number;
-  near?: number;
-  total?: number;
-  amountLabel?: string;
-  amount?: number;
-}
-
 export interface TokenBalancesView {
   [tokenId: string]: string;
 }
 
 export interface NearViewFunctionOptions {
   methodName: string;
-  args: object;
+  args?: object;
 }
 
 export interface NearFunctionCallOptions extends NearViewFunctionOptions {
@@ -70,4 +58,35 @@ export const ftGetStorageBalance = (
     methodName: 'storage_balance_of',
     args: { account_id: accountId },
   });
+};
+
+export const getUserRegisteredTokens = (
+  accountId: string = wallet.getAccountId(),
+): Promise<string[]> => {
+  return DexViewFunction({
+    methodName: 'get_user_whitelisted_tokens',
+    args: { account_id: accountId },
+  });
+};
+
+export const ftGetTokenMetadata = async (
+  id: string,
+): Promise<TokenMetadata> => {
+  let metadata = await db.allTokens().where({ id }).first();
+  if (!metadata) {
+    metadata = await ftViewFunction(id, {
+      methodName: 'ft_metadata',
+    });
+  }
+  if (metadata) {
+    return metadata;
+  } else {
+    return {
+      id,
+      name: id,
+      symbol: id?.split('.')[0].slice(0, 8),
+      decimals: 6,
+      icon: undefined,
+    };
+  }
 };

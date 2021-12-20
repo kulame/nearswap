@@ -30,7 +30,8 @@
       "near/*": ["src/near/*"],
       "hooks/*": ["src/hooks/*"],
       "pages/*": ["src/pages/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "store/*": ["src/store/*"]
     },
     "types": ["vite-plugin-svgr/client"]
   },
