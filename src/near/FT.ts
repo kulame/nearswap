@@ -17,7 +17,7 @@ export interface TokenBalancesView {
 
 export interface NearViewFunctionOptions {
   methodName: string;
-  args?: object;
+  args: object;
 }
 
 export interface NearFunctionCallOptions extends NearViewFunctionOptions {
@@ -76,6 +76,7 @@ export const ftGetTokenMetadata = async (
   if (!metadata) {
     metadata = await ftViewFunction(id, {
       methodName: 'ft_metadata',
+      args: {},
     });
   }
   if (metadata) {
@@ -89,4 +90,11 @@ export const ftGetTokenMetadata = async (
       icon: undefined,
     };
   }
+};
+
+export const ftGetBalance = (tokenId: string) => {
+  return ftViewFunction(tokenId, {
+    methodName: 'ft_balance_of',
+    args: { account_id: wallet.getAccountId() },
+  });
 };

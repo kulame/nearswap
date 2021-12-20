@@ -8,6 +8,7 @@ import {
   ONE_YOCTO_NEAR,
   Transaction,
 } from 'near/FT';
+import { TokenMetadata } from 'store/Database';
 import {
   ACCOUNT_MIN_STORAGE_AMOUNT,
   currentStorageBalance,
@@ -79,4 +80,12 @@ export const registerTokenAndExchange = async (tokenId: string) => {
   }
 
   return executeMultipleTransactions(transactions);
+};
+
+export const nearMetadata: TokenMetadata = {
+  id: 'NEAR',
+  name: 'NEAR',
+  symbol: 'NEAR',
+  decimals: 24,
+  icon: 'https://near.org/wp-content/themes/near-19/assets/img/brand-icon.png',
 };

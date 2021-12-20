@@ -1,10 +1,24 @@
 import { Card } from 'components/Card';
 import { useTokens } from 'hooks/useToken';
+import { nearMetadata } from 'near/token';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { TokenMetadata } from 'store/Database';
 export default function Deposit() {
   const { id } = useParams<{ id: string }>();
   const tokens = useTokens();
+  let currentToken;
+  if (id && tokens) {
+    currentToken = tokens.find((token) => token.id === id);
+  }
+
+  if (!currentToken) {
+    currentToken = nearMetadata;
+  }
+
+  const [selectedToken, setSelectedToken] =
+    useState<TokenMetadata>(currentToken);
+
   const [amount, setAmount] = useState<string>('');
 
   return (
