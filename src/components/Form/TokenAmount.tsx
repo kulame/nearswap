@@ -1,13 +1,16 @@
 import InputAmount from 'components/Form/InputAmount';
+import SelectToken from 'components/Form/SelectToken';
 import { SmallWallet } from 'components/Icon/SmallWallet';
-import { TokenBalancesView, TokenMetadata } from 'near/FT';
+import Icon from 'components/Tokens/Icon';
+import { TokenBalancesView } from 'near/FT';
 import { FormattedMessage } from 'react-intl';
+import { TokenMetadata } from 'store/Database';
 import { toPrecision, toRoundedReadableNumber } from 'utils/numbers';
 interface TokenAmountProps {
   amount?: string;
   max?: string;
   total: string;
-  tokens?: TokenMetadata[];
+  tokens: TokenMetadata[];
   showSelectToken?: boolean;
   selectedToken: TokenMetadata;
   balances?: TokenBalancesView;
@@ -46,7 +49,7 @@ export default function TokenAmount({
       <div className="flex justify-end text-xs font-semibold pb-0.5 w-3/5">
         <span className="text-primaryText">
           {useNearBalance ? (
-            <span className="mr-2 float-left">
+            <span className="float-left mr-2">
               <SmallWallet />
             </span>
           ) : null}
@@ -55,7 +58,7 @@ export default function TokenAmount({
           <span title={total}>{toPrecision(total, 3, true)}</span>
         </span>
       </div>
-      <fieldset className="relative flex overflow-hidden align-center my-2">
+      <fieldset className="relative flex my-2 overflow-hidden align-center">
         <InputAmount
           className="w-3/5 border border-transparent rounded"
           id="inputAmount"
@@ -81,7 +84,7 @@ export default function TokenAmount({
           />
         )}
         {!showSelectToken && selectedToken && (
-          <div className="flex items-center justify-end font-semibold w-2/5">
+          <div className="flex items-center justify-end w-2/5 font-semibold">
             <Icon token={selectedToken} showArrow={false} />
           </div>
         )}

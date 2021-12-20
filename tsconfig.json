@@ -31,7 +31,8 @@
       "hooks/*": ["src/hooks/*"],
       "pages/*": ["src/pages/*"],
       "utils/*": ["src/utils/*"],
-      "store/*": ["src/store/*"]
+      "store/*": ["src/store/*"],
+      "locales/*": ["src/locales/*"]
     },
     "types": ["vite-plugin-svgr/client"]
   },

@@ -1,12 +1,14 @@
 import { Buffer } from 'buffer';
 import Header from 'components/Header';
 import ThemeProvider from 'components/theme';
+import zh_CN from 'locales/zh_CN';
 import * as nearAPI from 'near-api-js';
 import { NearWalletContext } from 'near/Account';
 import Deposit from 'pages/Deposit';
 import Pool from 'pages/Pool';
 import Swap from 'pages/Swap';
 import { useState } from 'react';
+import { IntlProvider } from 'react-intl';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import './App.css';
@@ -40,28 +42,34 @@ const BodyWrapper = styled.div`
   `};
 `;
 
+const local = localStorage.getItem('local') || navigator.language;
+
 function App() {
   const [wallet, setWallet] = useState<nearAPI.WalletConnection | null>(null);
+  const [messages, setMessages] = useState(zh_CN);
+  const [locale, setLocale] = useState(local);
   return (
     <>
       <NearWalletContext.Provider value={[wallet, setWallet]}>
-        <ThemeProvider>
-          <AppWrapper>
-            <HeaderWrapper id="headerwrapper">
-              <Header />
-            </HeaderWrapper>
-            <BodyWrapper>
-              <Routes>
-                <Route path="/" element={<Swap />} />
-                <Route path="/swap" element={<Swap />} />
-                <Route path="/deposit" element={<Deposit />}>
-                  <Route path=":id" element={<Deposit />} />
-                </Route>
-                <Route path="/pool" element={<Pool />} />
-              </Routes>
-            </BodyWrapper>
-          </AppWrapper>
-        </ThemeProvider>
+        <IntlProvider messages={messages} locale={locale}>
+          <ThemeProvider>
+            <AppWrapper>
+              <HeaderWrapper id="headerwrapper">
+                <Header />
+              </HeaderWrapper>
+              <BodyWrapper>
+                <Routes>
+                  <Route path="/" element={<Swap />} />
+                  <Route path="/swap" element={<Swap />} />
+                  <Route path="/deposit" element={<Deposit />}>
+                    <Route path=":id" element={<Deposit />} />
+                  </Route>
+                  <Route path="/pool" element={<Pool />} />
+                </Routes>
+              </BodyWrapper>
+            </AppWrapper>
+          </ThemeProvider>
+        </IntlProvider>
       </NearWalletContext.Provider>
     </>
   );

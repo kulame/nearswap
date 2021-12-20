@@ -1,6 +1,17 @@
-import { TokenBalancesView, TokenMetadata } from 'near/FT';
+import { ArrowDownWhite } from 'components/Icon/Arrows';
+import Table from 'components/Table';
+import CommenBasses from 'components/Tokens/CommenBasses';
+import { useTokensData } from 'hooks/useToken';
+import { TokenBalancesView } from 'near/FT';
 import { useEffect, useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { IoCloseOutline } from 'react-icons/io5';
 import { FormattedMessage, useIntl } from 'react-intl';
+import MicroModal from 'react-micro-modal';
+import { TokenMetadata } from 'store/Database';
+import { isMobile } from 'utils/device';
+import { toRealSymbol } from 'utils/token';
+import AddToken from './AddToken';
 
 function sort(a: any, b: any) {
   if (typeof a === 'string' && typeof b === 'string') {
@@ -38,7 +49,7 @@ export default function SelectToken({
 
   if (!onSelect) {
     return (
-      <button className="focus:outline-none p-1" type="button">
+      <button className="p-1 focus:outline-none" type="button">
         {selected}
       </button>
     );
@@ -130,7 +141,7 @@ export default function SelectToken({
               }`}
             >
               <p
-                className="text-lg text-gray-400 font-semibold leading-none"
+                className="text-lg font-semibold leading-none text-gray-400"
                 style={{ lineHeight: 'unset' }}
               >
                 {placeholder ?? 'Select'}
@@ -165,7 +176,7 @@ export default function SelectToken({
     >
       {() => (
         <section className="text-white">
-          <div className="flex items-center justify-between pb-5 pr-8 px-6 relative">
+          <div className="relative flex items-center justify-between px-6 pb-5 pr-8">
             <h2 className="text-sm font-bold text-center">
               <FormattedMessage
                 id="select_token"
@@ -174,11 +185,11 @@ export default function SelectToken({
             </h2>
             <IoCloseOutline
               onClick={() => handleClose()}
-              className="absolute text-gray-400 text-2xl right-6 cursor-pointer"
+              className="absolute text-2xl text-gray-400 cursor-pointer right-6"
             />
           </div>
-          <div className="flex justify-between items-center mb-5 mx-6">
-            <div className="flex-auto rounded text-gray-400 flex items-center pr-2 mr-4 bg-inputDarkBg">
+          <div className="flex items-center justify-between mx-6 mb-5">
+            <div className="flex items-center flex-auto pr-2 mr-4 text-gray-400 rounded bg-inputDarkBg">
               <input
                 className={`text-sm outline-none rounded w-full py-2 px-3`}
                 placeholder={intl.formatMessage({ id: 'search_token' })}

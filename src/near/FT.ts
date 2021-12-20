@@ -98,3 +98,10 @@ export const ftGetBalance = (tokenId: string) => {
     args: { account_id: wallet.getAccountId() },
   });
 };
+
+export const getTokenBalances = (): Promise<TokenBalancesView> => {
+  return DexViewFunction({
+    methodName: 'get_deposits',
+    args: { account_id: wallet.getAccountId() },
+  });
+};

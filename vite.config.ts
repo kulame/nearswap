@@ -22,6 +22,7 @@ export default defineConfig({
       pages: resolve(__dirname, "src", "pages"),
       utils: resolve(__dirname, "src", "utils"),
       store: resolve(__dirname, "src", "store"),
+      locales: resolve(__dirname, "src", "locales"),
     }
   },
   define: {
