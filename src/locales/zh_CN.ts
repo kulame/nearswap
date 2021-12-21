@@ -6,5 +6,6 @@ const zh_CN = {
   popular_tokens: '热门代币',
   asset_label: '资产',
   total_label: '总量',
+  enter_token_address: '输入代币地址',
 };
 export default zh_CN;
