@@ -2,7 +2,12 @@ const colors = require('tailwindcss/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: [],
+  purge: [
+    './src/**/*.html',
+    './src/**/*.js',
+    './src/**/*.ts',
+    './src/**/*.tsx',
+  ],
   darkMode: 'media', // or 'media' or 'class'
   theme: {
     screens: {
@@ -76,4 +81,5 @@ module.exports = {
       padding: ['last'],
     },
   },
+
 };

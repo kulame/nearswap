@@ -3,8 +3,9 @@ import ThemeProvider from 'components/theme';
 import zh_CN from 'locales/zh_CN';
 import * as nearAPI from 'near-api-js';
 import { NearWalletContext } from 'near/Account';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { IntlProvider } from 'react-intl';
+import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 const local = localStorage.getItem('local') || navigator.language;
@@ -42,18 +43,22 @@ const Wrapper = (props: any) => {
   const [messages, setMessages] = useState(zh_CN);
   const [locale, setLocale] = useState(local);
   return (
-    <NearWalletContext.Provider value={[wallet, setWallet]}>
-      <IntlProvider messages={messages} locale={locale}>
-        <ThemeProvider>
-          <AppWrapper>
-            <HeaderWrapper id="headerwrapper">
-              <Header />
-            </HeaderWrapper>
-            <BodyWrapper>{props.children}</BodyWrapper>
-          </AppWrapper>
-        </ThemeProvider>
-      </IntlProvider>
-    </NearWalletContext.Provider>
+    <React.StrictMode>
+      <BrowserRouter>
+        <NearWalletContext.Provider value={[wallet, setWallet]}>
+          <IntlProvider messages={messages} locale={locale}>
+            <ThemeProvider>
+              <AppWrapper>
+                <HeaderWrapper id="headerwrapper">
+                  <Header />
+                </HeaderWrapper>
+                <BodyWrapper>{props.children}</BodyWrapper>
+              </AppWrapper>
+            </ThemeProvider>
+          </IntlProvider>
+        </NearWalletContext.Provider>
+      </BrowserRouter>
+    </React.StrictMode>
   );
 };
 
