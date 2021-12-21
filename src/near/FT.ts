@@ -1,7 +1,11 @@
 import db, { TokenMetadata } from 'store/Database';
-import { wallet } from './Account';
+import { toNonDivisibleNumber } from 'utils/numbers';
+import { executeMultipleTransactions, wallet } from './Account';
+import { DEX_CONTRACT_ID, NearViewFunctionOptions, Transaction } from './near';
+import { storageDepositAction, STORAGE_TO_REGISTER_WITH_FT } from './storage';
+import { checkTokenNeedsStorageDeposit } from './token';
+import { unwrapNear, WRAP_NEAR_CONTRACT_ID } from './wrap-near';
 
-export const DEX_CONTRACT_ID = 'router.kula.testnet';
 export interface Token {
   readonly contract: string;
   readonly owner_id: string;
@@ -13,20 +17,6 @@ export interface Token {
 
 export interface TokenBalancesView {
   [tokenId: string]: string;
-}
-
-export interface NearViewFunctionOptions {
-  methodName: string;
-  args: object;
-}
-
-export interface NearFunctionCallOptions extends NearViewFunctionOptions {
-  gas?: string;
-  amount?: string;
-}
-export interface Transaction {
-  receiverId: string;
-  functionCalls: NearFunctionCallOptions[];
 }
 
 export const ONE_YOCTO_NEAR = '0.000000000000000000000001';
@@ -104,4 +94,57 @@ export const getTokenBalances = (): Promise<TokenBalancesView> => {
     methodName: 'get_deposits',
     args: { account_id: wallet.getAccountId() },
   });
+};
+
+interface WithdrawOptions {
+  token: TokenMetadata;
+  amount: string;
+  unregister?: boolean;
+}
+export const withdraw = async ({
+  token,
+  amount,
+  unregister = false,
+}: WithdrawOptions) => {
+  if (token.id === WRAP_NEAR_CONTRACT_ID) {
+    return unwrapNear(amount);
+  }
+
+  const transactions: Transaction[] = [];
+  const parsedAmount = toNonDivisibleNumber(token.decimals, amount);
+  const ftBalance = await ftGetStorageBalance(token.id);
+
+  transactions.unshift({
+    receiverId: DEX_CONTRACT_ID,
+    functionCalls: [
+      {
+        methodName: 'withdraw',
+        args: { token_id: token.id, amount: parsedAmount, unregister },
+        gas: '100000000000000',
+        amount: ONE_YOCTO_NEAR,
+      },
+    ],
+  });
+
+  if (!ftBalance || ftBalance.total === '0') {
+    transactions.unshift({
+      receiverId: token.id,
+      functionCalls: [
+        storageDepositAction({
+          registrationOnly: true,
+          amount: STORAGE_TO_REGISTER_WITH_FT,
+        }),
+      ],
+    });
+  }
+
+  const neededStorage = await checkTokenNeedsStorageDeposit();
+  if (neededStorage) {
+    transactions.unshift({
+      receiverId: DEX_CONTRACT_ID,
+      functionCalls: [storageDepositAction({ amount: neededStorage })],
+    });
+  }
+
+  return executeMultipleTransactions(transactions);
 };

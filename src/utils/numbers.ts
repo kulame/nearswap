@@ -63,3 +63,15 @@ export const toInternationalCurrencySystem = (
     ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(percent || 2) + 'K'
     : Math.abs(Number(labelValue)).toFixed(percent || 2);
 };
+
+export const toNonDivisibleNumber = (
+  decimals: number,
+  number: string,
+): string => {
+  if (decimals === null || decimals === undefined) return number;
+  const [wholePart, fracPart = ''] = number.split('.');
+
+  return `${wholePart}${fracPart.padEnd(decimals, '0').slice(0, decimals)}`
+    .replace(/^0+/, '')
+    .padStart(1, '0');
+};

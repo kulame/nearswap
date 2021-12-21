@@ -12,6 +12,7 @@ export interface TokenMetadata {
   amountLabel?: string;
   amount?: number;
 }
+
 class Database extends Dexie {
   public tokens: Dexie.Table<TokenMetadata>;
   public constructor() {

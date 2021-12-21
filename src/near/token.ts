@@ -1,12 +1,9 @@
 import { BN } from 'bn.js';
 import * as math from 'mathjs';
 import {
-  DEX_CONTRACT_ID,
   ftGetStorageBalance,
-  NearFunctionCallOptions,
   ONE_MORE_DEPOSIT_AMOUNT,
   ONE_YOCTO_NEAR,
-  Transaction,
 } from 'near/FT';
 import { TokenMetadata } from 'store/Database';
 import {
@@ -15,6 +12,7 @@ import {
   executeMultipleTransactions,
   wallet,
 } from './Account';
+import { DEX_CONTRACT_ID, NearFunctionCallOptions, Transaction } from './near';
 import {
   MIN_DEPOSIT_PER_TOKEN,
   needDepositStorage,
@@ -22,6 +20,11 @@ import {
   storageDepositForFTAction,
   STORAGE_PER_TOKEN,
 } from './storage';
+interface WithdrawActionOptions {
+  tokenId: string;
+  amount: string;
+  unregister?: boolean;
+}
 export const checkTokenNeedsStorageDeposit = async () => {
   let storageNeeded: math.MathType = 0;
 
@@ -82,10 +85,22 @@ export const registerTokenAndExchange = async (tokenId: string) => {
   return executeMultipleTransactions(transactions);
 };
 
+export const withdrawAction = ({
+  tokenId,
+  amount,
+  unregister = false,
+}: WithdrawActionOptions) => ({
+  methodName: 'withdraw',
+  args: { token_id: tokenId, amount, unregister },
+  gas: '100000000000000',
+  amount: ONE_YOCTO_NEAR,
+});
+
 export const nearMetadata: TokenMetadata = {
   id: 'NEAR',
   name: 'NEAR',
   symbol: 'NEAR',
   decimals: 24,
   icon: 'https://near.org/wp-content/themes/near-19/assets/img/brand-icon.png',
+  amount: 0,
 };

@@ -65,7 +65,7 @@ export const useTokenBalances = () => {
       .catch(() => setBalances({}));
   }, []);
 
-  return balances;
+  return balances as TokenBalancesView;
 };
 
 export const getDepositableBalance = async (
@@ -158,4 +158,20 @@ export const useTokensData = (
     loading: count < tokens.length,
     tokensData: result,
   };
+};
+
+export const useUserRegisteredTokens = () => {
+  const [tokens, setTokens] = useState<TokenMetadata[]>();
+
+  useEffect(() => {
+    if (wallet.isSignedIn()) {
+      getUserRegisteredTokens()
+        .then((tokenIds) =>
+          Promise.all(tokenIds.map((tokenId) => ftGetTokenMetadata(tokenId))),
+        )
+        .then(setTokens);
+    }
+  }, []);
+
+  return tokens;
 };

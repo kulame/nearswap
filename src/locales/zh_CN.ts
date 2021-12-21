@@ -7,5 +7,7 @@ const zh_CN = {
   asset_label: '资产',
   total_label: '总量',
   enter_token_address: '输入代币地址',
+  withdraw: '提现',
+  no_tokens_deposited: '没有添加代币',
 };
 export default zh_CN;

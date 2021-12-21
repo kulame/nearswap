@@ -1,10 +1,7 @@
 import BN from 'bn.js';
 import { wallet } from 'near/Account';
-import {
-  DexViewFunction,
-  DEX_CONTRACT_ID,
-  NearFunctionCallOptions,
-} from './FT';
+import { DexViewFunction } from './FT';
+import { DEX_CONTRACT_ID, NearFunctionCallOptions } from './near';
 
 export const MIN_DEPOSIT_PER_TOKEN = new BN('3000000000000000000000');
 
