@@ -155,10 +155,7 @@ export default function Header() {
   const [account, setAccount] = useState<ConnectedWalletAccount | null>(null);
 
   const getAccountInfo = useCallback(async () => {
-    console.log('get account info');
-    console.log(wallet);
     if (!wallet) {
-      console.log('get wallet');
       const myWallet = await getWallet();
       if (myWallet.isSignedIn()) {
         setWallet(myWallet);
@@ -175,17 +172,14 @@ export default function Header() {
   }, []);
 
   const toggleWalletModel = async () => {
-    console.log('Toggle Wallet Model');
     if (!(wallet && wallet.isSignedIn())) {
       const myWallet = await getWallet();
       myWallet.requestSignIn();
     }
-    console.log(account);
   };
 
   const disconnectWallet = async () => {
     wallet?.signOut();
-    console.log('wallet disconnected');
   };
 
   const { white } = useTheme();

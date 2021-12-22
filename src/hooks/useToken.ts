@@ -109,7 +109,6 @@ export const useTokensData = (
     });
     setCount((c) => c + 1);
   };
-
   const trigger = useCallback(() => {
     if (!!balances) {
       setCount(0);
@@ -147,7 +146,7 @@ export const useTokensData = (
           });
       }
     }
-  }, [balances]);
+  }, [tokens, balances]);
 
   useEffect(() => {
     trigger();

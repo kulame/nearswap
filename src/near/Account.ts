@@ -107,7 +107,6 @@ export default class SpecialWallet extends WalletConnection {
 export const wallet = new SpecialWallet(near, null);
 
 export const getWallet = async () => {
-  console.log('Toggle Wallet Model');
   const near = await connect(config);
 
   // create wallet connection

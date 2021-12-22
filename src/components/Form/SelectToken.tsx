@@ -3,7 +3,7 @@ import Table from 'components/Table';
 import CommenBasses from 'components/Tokens/CommenBasses';
 import { useTokensData } from 'hooks/useToken';
 import { TokenBalancesView } from 'near/FT';
-import { useEffect, useState } from 'react';
+import { useDebugValue, useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { IoCloseOutline } from 'react-icons/io5';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -58,6 +58,8 @@ export default function SelectToken({
   const dialogMinwidth = isMobile() ? 340 : 490;
   const dialogHidth = isMobile() ? '95%' : '57%';
   const intl = useIntl();
+  useDebugValue(tokens);
+
   const {
     tokensData,
     loading: loadingTokensData,

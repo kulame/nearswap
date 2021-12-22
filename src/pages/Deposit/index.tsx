@@ -24,7 +24,6 @@ export default function Deposit() {
   );
 
   const balances = useTokenBalances();
-  console.log(balances);
   const [amount, setAmount] = useState<string>('');
 
   const max = useDepositableBalance(selectedToken?.id, selectedToken?.decimals);
