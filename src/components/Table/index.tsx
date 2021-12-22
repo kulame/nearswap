@@ -94,7 +94,7 @@ export default function Table({
       <tbody>
         {tokens.filter(Boolean).map((token) => (
           <Token
-            key={token.id}
+            key={token.name}
             token={token}
             onClick={onClick}
             // render={render}
