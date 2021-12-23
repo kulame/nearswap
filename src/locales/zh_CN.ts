@@ -10,5 +10,6 @@ const zh_CN = {
   withdraw: '提现',
   no_tokens_deposited: '没有添加代币',
   deposit: '充值',
+  withdraw_token: '提现代币',
 };
 export default zh_CN;

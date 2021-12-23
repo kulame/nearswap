@@ -38,6 +38,7 @@ export function WithdrawModal(props: ReactModal.Props) {
   );
 
   const cardWidth = isMobile() ? '95vw' : '25vw';
+  console.log(cardWidth);
 
   const canSubmit = new BigNumber(amount).isLessThanOrEqualTo(
     new BigNumber(max),

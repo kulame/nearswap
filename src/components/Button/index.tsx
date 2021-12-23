@@ -1,4 +1,9 @@
+import { UnLoginIcon } from 'components/Icon/Farm';
+import { wallet } from 'near/Account';
+import { FARM_CONTRACT_ID } from 'near/near';
 import { darken } from 'polished';
+import { HTMLAttributes } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Button as RebassButton, ButtonProps } from 'rebass/styled-components';
 import styled from 'styled-components';
 export const BaseButton = styled(RebassButton)<
@@ -118,3 +123,56 @@ export const ButtonSecondary = styled(BaseButton)`
     text-decoration: none;
   }
 `;
+
+export function ConnectToNearBtn() {
+  return (
+    <div
+      className="flex items-center justify-center py-2 text-base rounded-full cursor-pointer"
+      style={{
+        background: 'linear-gradient(180deg, #00C6A2 0%, #008B72 100%)',
+        color: '#fff',
+      }}
+      onClick={() => wallet.requestSignIn(FARM_CONTRACT_ID)}
+    >
+      <div className="mr-3.5">
+        <UnLoginIcon />
+      </div>
+      <button>
+        <FormattedMessage
+          id="connect_to_near"
+          defaultMessage="Connect to NEAR"
+        />
+      </button>
+    </div>
+  );
+}
+
+export function GradientButton(
+  props: HTMLAttributes<HTMLButtonElement> & {
+    disabled?: boolean;
+    padding?: string;
+    className?: string;
+    color?: string;
+    btnClassName?: string;
+  },
+) {
+  const { disabled, className, color, btnClassName, onClick } = props;
+  return (
+    <div
+      className={`${className ? className : ''}`}
+      style={{
+        background: 'linear-gradient(180deg, #00C6A2 0%, #008B72 100%)',
+        borderRadius: '5px',
+        color: color || '',
+      }}
+    >
+      <button
+        onClick={onClick}
+        disabled={disabled}
+        className={`w-full h-full ${btnClassName ? btnClassName : ''}`}
+      >
+        {props.children}
+      </button>
+    </div>
+  );
+}

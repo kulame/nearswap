@@ -10,7 +10,7 @@ interface TokenAmountProps {
   amount?: string;
   max?: string;
   total: string;
-  tokens: TokenMetadata[];
+  tokens?: TokenMetadata[];
   showSelectToken?: boolean;
   selectedToken: TokenMetadata;
   balances?: TokenBalancesView;
@@ -68,7 +68,7 @@ export default function TokenAmount({
           onChangeAmount={onChangeAmount}
           disabled={disabled}
         />
-        {showSelectToken && (
+        {showSelectToken && tokens && (
           <SelectToken
             tokens={tokens}
             render={render}

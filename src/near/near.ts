@@ -14,3 +14,4 @@ export interface Transaction {
 }
 
 export const DEX_CONTRACT_ID = 'router.kula.testnet';
+export const FARM_CONTRACT_ID = 'form.kula.testnet';
