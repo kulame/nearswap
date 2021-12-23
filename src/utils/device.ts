@@ -1,5 +1,4 @@
 export const isMobile = (): boolean => {
-  console.log(window.screen.width);
   return window.screen.width < 1024;
 };
 
