@@ -70,6 +70,7 @@ export const ftGetTokenMetadata = async (
     });
   }
   if (metadata) {
+    metadata['id'] = id;
     return metadata;
   } else {
     return {
@@ -137,6 +138,43 @@ export const withdraw = async ({
       ],
     });
   }
+
+  const neededStorage = await checkTokenNeedsStorageDeposit();
+  if (neededStorage) {
+    transactions.unshift({
+      receiverId: DEX_CONTRACT_ID,
+      functionCalls: [storageDepositAction({ amount: neededStorage })],
+    });
+  }
+
+  return executeMultipleTransactions(transactions);
+};
+
+interface DepositOptions {
+  token: TokenMetadata;
+  amount: string;
+  msg?: string;
+}
+
+export const deposit = async ({ token, amount, msg = '' }: DepositOptions) => {
+  console.log(`deposit ${token}, ${amount}`);
+  const transactions: Transaction[] = [
+    {
+      receiverId: token.id,
+      functionCalls: [
+        {
+          methodName: 'ft_transfer_call',
+          args: {
+            receiver_id: DEX_CONTRACT_ID,
+            amount: toNonDivisibleNumber(token.decimals, amount),
+            msg,
+          },
+          amount: ONE_YOCTO_NEAR,
+          gas: '100000000000000',
+        },
+      ],
+    },
+  ];
 
   const neededStorage = await checkTokenNeedsStorageDeposit();
   if (neededStorage) {

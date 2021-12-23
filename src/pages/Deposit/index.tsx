@@ -1,4 +1,5 @@
 import { Balances } from 'components/Balances';
+import { DepositBtn } from 'components/Button/DepositBtn';
 import { Card } from 'components/Card';
 import TokenAmount from 'components/Form/TokenAmount';
 import {
@@ -52,6 +53,7 @@ export default function Deposit() {
           text={selectedToken.symbol}
           balances={balances}
         />
+        <DepositBtn balance={max} amount={amount} token={selectedToken} />
       </Card>
       <Balances title="Balance" tokens={userTokens} balances={balances} />
     </div>

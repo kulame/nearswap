@@ -9,5 +9,6 @@ const zh_CN = {
   enter_token_address: '输入代币地址',
   withdraw: '提现',
   no_tokens_deposited: '没有添加代币',
+  deposit: '充值',
 };
 export default zh_CN;
