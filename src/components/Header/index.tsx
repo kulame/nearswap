@@ -149,7 +149,7 @@ const BalanceText = styled(Text)`
   `};
 `;
 
-export default function Header() {
+const Header = () => {
   const [balance, setBalance] = useState('0');
   const [wallet, setWallet] = useContext(NearWalletContext);
   const [account, setAccount] = useState<ConnectedWalletAccount | null>(null);
@@ -223,4 +223,6 @@ export default function Header() {
       </HeaderControls>
     </HeaderFrame>
   );
-}
+};
+
+export default Header;

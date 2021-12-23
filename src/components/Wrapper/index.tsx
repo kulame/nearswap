@@ -1,4 +1,4 @@
-import Header from 'components/Header';
+import { NavigationBar } from 'components/layout/NavigationBar';
 import ThemeProvider from 'components/theme';
 import zh_CN from 'locales/zh_CN';
 import * as nearAPI from 'near-api-js';
@@ -37,18 +37,14 @@ const Wrapper = (props: any) => {
   return (
     <React.StrictMode>
       <BrowserRouter>
-        <NearWalletContext.Provider value={[wallet, setWallet]}>
-          <IntlProvider messages={messages} locale={locale}>
+        <IntlProvider messages={messages} locale={locale}>
+          <NavigationBar />
+          <NearWalletContext.Provider value={[wallet, setWallet]}>
             <ThemeProvider>
-              <AppWrapper>
-                <HeaderWrapper id="headerwrapper">
-                  <Header />
-                </HeaderWrapper>
-                {props.children}
-              </AppWrapper>
+              <AppWrapper>{props.children}</AppWrapper>
             </ThemeProvider>
-          </IntlProvider>
-        </NearWalletContext.Provider>
+          </NearWalletContext.Provider>
+        </IntlProvider>
       </BrowserRouter>
     </React.StrictMode>
   );

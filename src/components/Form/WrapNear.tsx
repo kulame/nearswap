@@ -7,7 +7,7 @@ import { nearDeposit, nearWithdraw } from 'near/wrap-near';
 import { useEffect, useRef, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { ReactModal } from 'react-modal';
+import ReactModal from 'react-modal';
 import { TokenMetadata } from 'store/Database';
 import { toReadableNumber } from 'utils/numbers';
 import SubmitButton from './SubmitButton';

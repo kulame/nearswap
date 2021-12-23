@@ -24,8 +24,7 @@ import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { HiOutlineExternalLink } from 'react-icons/hi';
 import { IoChevronBack } from 'react-icons/io5';
 import { FormattedMessage } from 'react-intl';
-import { matchPath, useNavigate } from 'react-router';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, matchPath, useLocation, useNavigate } from 'react-router-dom';
 
 function Anchor({
   to,
