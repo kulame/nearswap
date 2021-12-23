@@ -9,7 +9,6 @@ export const DepositBtn = (props: {
   balance: string;
 }) => {
   const { amount, token, balance } = props;
-  console.log(token);
 
   const nearValidate =
     token.id === 'NEAR'
@@ -44,8 +43,6 @@ export const DepositBtn = (props: {
         }
         onClick={() => {
           if (canSubmit) {
-            console.log(token);
-            console.log(amount);
             deposit({
               token,
               amount,

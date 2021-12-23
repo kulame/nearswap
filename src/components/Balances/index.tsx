@@ -116,7 +116,7 @@ export function Balances(props: {
         {tokens.length > 0 ? (
           <div className="flex items-center justify-center pt-5">
             <button
-              className={`flex flex-row w-full justify-center px-5 py-2 mt-6 text-white disabled:cursor-not-allowed mx-auto`}
+              className={`flex flex-row w-full justify-center px-5 py-2 mt-6 text-white text-sm disabled:cursor-not-allowed mx-auto`}
               style={{
                 background: 'linear-gradient(180deg, #00C6A2 0%, #008B72 100%)',
                 borderRadius: '5px',

@@ -52,7 +52,11 @@ const Wrapper = (props: any) => {
                 <HeaderWrapper id="headerwrapper">
                   <Header />
                 </HeaderWrapper>
-                <BodyWrapper>{props.children}</BodyWrapper>
+                <BodyWrapper>
+                  <div className="relative min-h-screen pb-20 overflow-x-hidden xs:flex xs:flex-col md:flex md:flex-col">
+                    {props.children}
+                  </div>
+                </BodyWrapper>
               </AppWrapper>
             </ThemeProvider>
           </IntlProvider>
