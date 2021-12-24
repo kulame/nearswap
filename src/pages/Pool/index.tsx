@@ -2,7 +2,6 @@ import AppBody from 'components/Body';
 import { ButtonLight } from 'components/Button';
 import { AutoColumn, ColumnCenter } from 'components/Column';
 import CurrencyInputPanel from 'components/CurrencyInputPanel';
-import { AddRemoveTabs } from 'components/NavigationTabs';
 import { Wrapper } from 'components/swap/styleds';
 import { Token } from 'near/FT';
 import { useContext, useState } from 'react';
@@ -34,7 +33,6 @@ export default function Pool() {
   return (
     <>
       <AppBody>
-        <AddRemoveTabs adding={true} />
         <Wrapper id="pool-page">
           <AutoColumn gap={'sm'}>
             <CurrencyInputPanel

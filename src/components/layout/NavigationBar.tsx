@@ -438,11 +438,9 @@ export const NavigationBar = () => {
             <Logo />
           </div>
           <div className="flex items-center">
-            <Quiz />
             <Anchor to="/deposit" pattern="/deposit/:id?" name="Deposit" />
             <Anchor to="/" pattern="/" name="Swap" />
             <PoolsMenu />
-            <Anchor to="/farms" pattern="/farms" name="Farms" />
           </div>
           <div className="flex items-center justify-end flex-1">
             {wallet.isSignedIn() && (
