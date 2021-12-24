@@ -32,5 +32,6 @@ const zh_CN = {
   sign_out: '登出',
   wrapnear_tip_one:
     '包裹NEAR是一个全新的支付方式，它可以让您在任何时候将您的NEAR转换为任何其他代币。',
+  connect_to_near: '连接到NEAR',
 };
 export default zh_CN;

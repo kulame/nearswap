@@ -26,6 +26,7 @@ export const DexViewFunction = ({
   methodName,
   args,
 }: NearViewFunctionOptions) => {
+  //console.log(`call ${methodName} with args: ${JSON.stringify(args)}`);
   return wallet.account().viewFunction(DEX_CONTRACT_ID, methodName, args);
 };
 
@@ -53,10 +54,14 @@ export const ftGetStorageBalance = (
 export const getUserRegisteredTokens = (
   accountId: string = wallet.getAccountId(),
 ): Promise<string[]> => {
-  return DexViewFunction({
-    methodName: 'get_user_tokens',
-    args: { account_id: accountId },
-  });
+  if (accountId) {
+    return DexViewFunction({
+      methodName: 'get_user_tokens',
+      args: { account_id: accountId },
+    });
+  } else {
+    return Promise.resolve([]);
+  }
 };
 
 export const ftGetTokenMetadata = async (

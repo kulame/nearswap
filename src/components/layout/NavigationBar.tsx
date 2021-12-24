@@ -16,7 +16,7 @@ import {
   useUserRegisteredTokens,
 } from 'hooks/useToken';
 import { wallet } from 'near/Account';
-import { FARM_CONTRACT_ID } from 'near/near';
+import { DEX_CONTRACT_ID } from 'near/near';
 import { useState } from 'react';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { IoChevronBack } from 'react-icons/io5';
@@ -163,7 +163,7 @@ function AccountEntry() {
   }
 
   return (
-    <div className="z-30 justify-end h-full mx-5 ml-2 text-xs text-center user">
+    <div className="z-30 justify-end h-full mx-5 ml-2 text-center user">
       <div
         className={`cursor-pointer font-bold items-center justify-end text-center overflow-visible relative h-16 pt-5`}
         onMouseEnter={() => {
@@ -188,7 +188,7 @@ function AccountEntry() {
               accountName
             ) : (
               <button
-                onClick={() => wallet.requestSignIn(FARM_CONTRACT_ID)}
+                onClick={() => wallet.requestSignIn(DEX_CONTRACT_ID)}
                 type="button"
               >
                 <span className="ml-2 text-xs">
@@ -224,7 +224,7 @@ function AccountEntry() {
             ) : null}
             <div className="flex items-center justify-center pt-5">
               <GradientButton
-                className="h-8 py-2 mr-2 text-xs text-white cursor-pointer w-36"
+                className="h-8 py-2 text-xs text-white cursor-pointer w-36"
                 onClick={() => navigate('/account')}
               >
                 <FormattedMessage

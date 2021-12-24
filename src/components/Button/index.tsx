@@ -169,7 +169,7 @@ export function GradientButton(
       <button
         onClick={onClick}
         disabled={disabled}
-        className={`w-full h-full ${btnClassName ? btnClassName : ''}`}
+        className={`w-full h-full text-xs${btnClassName ? btnClassName : ''}`}
       >
         {props.children}
       </button>
