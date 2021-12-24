@@ -163,7 +163,7 @@ function AccountEntry() {
   }
 
   return (
-    <div className="z-30 justify-end h-full mx-5 ml-2 text-center user">
+    <div className="z-30 justify-end h-full mx-5 ml-2 text-xs user">
       <div
         className={`cursor-pointer font-bold items-center justify-end text-center overflow-visible relative h-16 pt-5`}
         onMouseEnter={() => {
