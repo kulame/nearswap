@@ -6,7 +6,6 @@ import { useMenuItems } from 'components/Header/menu';
 import { Logo } from 'components/Icon/Logo';
 import {
   IconAirDropGreenTip,
-  IconBubble,
   IconCreateNew,
   IconMyLiquidity,
   IconPools,
@@ -21,7 +20,6 @@ import { wallet } from 'near/Account';
 import { FARM_CONTRACT_ID } from 'near/near';
 import { useState } from 'react';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
-import { HiOutlineExternalLink } from 'react-icons/hi';
 import { IoChevronBack } from 'react-icons/io5';
 import { FormattedMessage } from 'react-intl';
 import { Link, matchPath, useLocation, useNavigate } from 'react-router-dom';
@@ -52,46 +50,6 @@ function Anchor({
     </Link>
   );
 }
-
-const Quiz = () => {
-  const [hoverQuiz, setHoverQuiz] = useState(false);
-  return (
-    <div
-      className="relative z-20"
-      onMouseOver={() => setHoverQuiz(true)}
-      onMouseLeave={() => setHoverQuiz(false)}
-    >
-      <span className="relative inline-flex p-4">
-        <IconBubble />
-        <span className={`w-20 h-14 text-gray-800 absolute top-4 left-1`}>
-          Quiz
-        </span>
-      </span>
-      <div
-        className={`${
-          hoverQuiz ? 'block' : 'hidden'
-        } absolute top-12 -left-20 rounded-md`}
-      >
-        <Card
-          width="w-60"
-          padding="py-4"
-          rounded="rounded-md"
-          className="border border-primaryText shadow-4xl"
-        >
-          <div
-            className="flex justify-start py-4 pl-10 text-sm font-semibold text-left cursor-pointer whitespace-nowrap hover:bg-navHighLightBg text-primaryText hover:text-white"
-            onClick={() =>
-              window.open('https://mzko2gfnij6.typeform.com/to/EPmUetxU')
-            }
-          >
-            <FormattedMessage id="Risk" defaultMessage="Risk" />
-            <HiOutlineExternalLink className="float-right ml-2 text-xl" />
-          </div>
-        </Card>
-      </div>
-    </div>
-  );
-};
 
 function PoolsMenu() {
   const location = useLocation();
@@ -267,7 +225,7 @@ function AccountEntry() {
             ) : null}
             <div className="flex items-center justify-center pt-5">
               <GradientButton
-                className="h-8 py-2 mr-2 text-white cursor-pointer w-36"
+                className="h-8 py-2 mr-2 text-xs text-white cursor-pointer w-36"
                 onClick={() => navigate('/account')}
               >
                 <FormattedMessage
@@ -309,7 +267,6 @@ function MoreMenu() {
     isExternal: boolean,
     label: string,
     children?: any,
-    language?: string,
   ) => {
     if (url) {
       if (isExternal) {
@@ -319,8 +276,6 @@ function MoreMenu() {
       }
     } else if (children) {
       onClickMenuItem?.(children, label);
-    } else {
-      switchLanuage(language);
     }
   };
   const hasSubMenu = curMenuItems.some(({ children }) => !!children?.length);
@@ -387,13 +342,7 @@ function MoreMenu() {
                  }
                  cursor-pointer py-4 pl-7`}
                   onClick={() =>
-                    handleMoreMenuClick(
-                      url,
-                      isExternal,
-                      label,
-                      children,
-                      language,
-                    )
+                    handleMoreMenuClick(url, isExternal, label, children)
                   }
                 >
                   {logo && (
