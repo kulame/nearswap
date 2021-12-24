@@ -1,7 +1,6 @@
 import { TokenList } from 'components/Balances/TokenList';
 import { GradientButton } from 'components/Button';
 import { Card } from 'components/Card';
-import WrapNear from 'components/Form/WrapNear';
 import { useMenuItems } from 'components/Header/menu';
 import { Logo } from 'components/Icon/Logo';
 import {
@@ -10,7 +9,7 @@ import {
   IconMyLiquidity,
   IconPools,
 } from 'components/Icon/Nav';
-import { Near, WrapNearEnter } from 'components/Icon/Near';
+import { Near } from 'components/Icon/Near';
 import {
   useTokenBalances,
   useTokens,
@@ -389,44 +388,9 @@ export const NavigationBar = () => {
           <div className="flex items-center">
             <Anchor to="/deposit" pattern="/deposit/:id?" name="Deposit" />
             <Anchor to="/" pattern="/" name="Swap" />
-            <PoolsMenu />
           </div>
           <div className="flex items-center justify-end flex-1">
-            {wallet.isSignedIn() && (
-              <div className="text-white">
-                <div
-                  className="flex items-center h-6 px-2 py-1 text-sm border rounded cursor-pointer border-framBorder text-framBorder hover:text-white hover:bg-framBorder hover:border-0"
-                  onClick={() => setShowWrapNear(true)}
-                >
-                  <WrapNearEnter />
-                  <span className="ml-2 whitespace-nowrap">
-                    <FormattedMessage
-                      id="wrapnear"
-                      defaultMessage="Wrap NEAR"
-                    />
-                  </span>
-                </div>
-                <WrapNear
-                  isOpen={showWrapNear}
-                  onRequestClose={() => setShowWrapNear(false)}
-                  allTokens={allTokens}
-                  style={{
-                    overlay: {
-                      backdropFilter: 'blur(15px)',
-                      WebkitBackdropFilter: 'blur(15px)',
-                    },
-                    content: {
-                      outline: 'none',
-                      position: 'fixed',
-                      width: 550,
-                      bottom: '50%',
-                    },
-                  }}
-                />
-              </div>
-            )}
             <AccountEntry />
-            <MoreMenu />
           </div>
         </nav>
       </div>
